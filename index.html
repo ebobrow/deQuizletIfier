@@ -7,17 +7,20 @@
     <link rel="stylesheet" href="main.css" />
   </head>
   <body>
-    <h1>DeQuizletIfier</h1>
-    <h2 id="prompt"></h2>
-    <div>
-      <input type="text" id="guess" />
-      <button type="button" onclick="guess()">Guess</button>
+    <div class="card">
+      <h3 id="prompt">DeQuizletIfier</h3>
+      <div>
+        <input type="text" id="guess" />
+        <button type="button" onclick="guess()">Guess</button>
+      </div>
     </div>
 
-    <p id="wrong"></p>
+    <div id="wrong">
+      <h5>Incorrect items:</h5>
+    </div>
 
     <div>
-      <textarea id="cards" rows="20" cols="100"></textarea>
+      <textarea id="cards"></textarea>
     </div>
     <button type="button" onclick="setCards()">Set cards</button>
   </body>

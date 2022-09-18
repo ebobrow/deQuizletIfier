@@ -7,13 +7,21 @@ const setPrompt = val => {
   prompt.innerText = val;
 };
 
+const removeIncorrect = idx => {
+  incorrectItems.splice(idx, 1);
+  displayIncorrect();
+};
+
 const displayIncorrect = () => {
-  let text = "Incorrect terms:";
+  let text = "<h5>Incorrect terms:</h5><ul>";
+  let idx = 0;
   for (item of incorrectItems) {
-    text += `\n${item.term}: ${item.definition}`;
+    text += `<li><span class="term">${item.term}</span>: ${item.definition} (<span class="remove" onclick="removeIncorrect(${idx})">remove</span>)</li>`;
+    idx += 1;
   }
+  text += "</ul>";
   const wrongEl = document.getElementById("wrong");
-  wrongEl.innerText = text;
+  wrongEl.innerHTML = text;
 };
 
 const setCards = () => {
