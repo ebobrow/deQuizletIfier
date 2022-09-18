@@ -1,9 +1,19 @@
 let curCards;
 let ptr = 0;
+let incorrectItems = [];
 
 const setPrompt = val => {
   const prompt = document.getElementById("prompt");
-  prompt.innerHTML = val;
+  prompt.innerText = val;
+};
+
+const displayIncorrect = () => {
+  let text = "Incorrect terms:";
+  for (item of incorrectItems) {
+    text += `\n${item.term}: ${item.definition}`;
+  }
+  const wrongEl = document.getElementById("wrong");
+  wrongEl.innerText = text;
 };
 
 const setCards = () => {
@@ -27,11 +37,22 @@ const guess = () => {
     setPrompt("Correct!");
   } else {
     setPrompt(`Incorrect; answer was ${curCards[ptr].term}`);
+    incorrectItems.push(curCards[ptr]);
+    displayIncorrect();
   }
   setTimeout(newCard, 1000);
 };
 
 const newCard = () => {
-  ptr += 1;
-  setPrompt(curCards[ptr].definition);
+  if (ptr === curCards.length - 1) {
+    ptr = 0;
+    incorrectItems.sort(() => Math.random() - 0.5);
+    curCards = incorrectItems;
+    incorrectItems = [];
+    setPrompt(curCards[ptr].definition);
+    displayIncorrect();
+  } else {
+    ptr += 1;
+    setPrompt(curCards[ptr].definition);
+  }
 };
